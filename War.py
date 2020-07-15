@@ -40,9 +40,12 @@ def secondScreen(*args):
     # Remove previous frame from screen
     frame1.destroy()
     # Create a label for ai's card
-    AICardLabel = ttk.Label(frame2, text = "AI's Card: ").grid(row = 0, column = 0)
+    AICardLabel = ttk.Label(frame2, text = "AI's Card: ").grid(row = 0, column = 0, sticky = (N, W, E, S))
     # Create a label for player's card
-    PlayerCardLabel = ttk.Label(frame2, text = name.get() + "'s Card: ").grid(row = 0, column = 1)
+    PlayerCardLabel = ttk.Label(frame2, text = name.get() + "'s Card: ").grid(row = 0, column = 1, sticky = (N, W, E, S))
+    # Rebind Enter to bring us to the third screen
+    root.bind('<Return>', thirdScreen)
+    for child in frame2.winfo_children(): child.grid_configure(padx=5, pady=5)
 
 def thirdScreen(*args):
     # Create a label for the ai's card using the top of the ai player's deck
@@ -87,15 +90,15 @@ frame2.grid(column=0, row=0, sticky=(N, W, E, S))
 # Lower this second frame below the first frame
 frame2.lower(frame1)
 # Create a name label
-nameLabel = ttk.Label(frame1, text = "Your Name: ").grid(row = 0, column = 0)
+nameLabel = ttk.Label(frame1, text = "Your Name: ").grid(row = 0, column = 0, sticky = (N, W, E, S))
 # Create a string variable to hold the name of the player
 name = StringVar()
 # Create an text box for the player to type his or her name into
 nameEntry = ttk.Entry(frame1, textvariable = name)
-nameEntry.grid(row=0, column=1)
+nameEntry.grid(row=0, column=1, sticky = (N, W, E, S))
 # Create a button that will go to the second screen when pressed
 Submit = Button(frame1, text = "Submit!", command = secondScreen) #command = command to go to the next screen?
-Submit.grid(row=1, column=1)
+Submit.grid(row=1, column=1, sticky = (N, W, E, S))
 # Add extra spacing around each widget 
 for child in frame1.winfo_children(): child.grid_configure(padx=5, pady=5)
 #Create a photo image of the back of a card to be used later
@@ -109,6 +112,10 @@ PlayerCard.grid(row = 1,column = 1, sticky = (N, W, E, S))
 # Create a button to flip over the cards
 Play = ttk.Button(frame2, text = "Click the button to flip your card!", command = thirdScreen) 
 Play.grid(row=2, column=1)
+# Start with the cursor in our textbox
+nameEntry.focus()
+# Bind return to also bring us to the next screen
+root.bind('<Return>', secondScreen)
 # Add extra padding to look better spaced
 for child in frame2.winfo_children(): child.grid_configure(padx=5, pady=5)
 

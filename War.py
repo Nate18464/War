@@ -70,14 +70,14 @@ def thirdScreen(*args):
     PlayerCard["image"] = playerdeck[0].photoImage()
     # Create a button that says next card and will repeat this function
     Play["text"] = "Next card"
-    if Card.value(aideck[0]) > Card.value(playerdeck[0]):
-        aiWin()
-    elif Card.value(aideck[0]) < Card.value(playerdeck[0]):
-        playerWin()
+    if Card.value(aideck[0]) != Card.value(playerdeck[0]):
+        if Card.value(aideck[0]) > Card.value(playerdeck[0]):
+            aiWin()
+        elif Card.value(aideck[0]) < Card.value(playerdeck[0]):
+            playerWin()
+        winSetup()
     else:
         War() 
-    if Card.value(aideck[0]) != Card.value(playerdeck[0]):
-        winSetup()
     anySetup()
     # Add extra padding to look better spaced
     for child in frame2.winfo_children(): child.grid_configure(padx=5, pady=5)
@@ -182,12 +182,43 @@ for c in range(52):
 aideck = []
 playerdeck = []
 for c in range(51, -1, -1):
+    break
     randnum = random.randint(0,c)
     if c%2 == 0:
         aideck.append(deck[randnum])
     else:
         playerdeck.append(deck[randnum])
     deck.pop(randnum)
+aideck.append(Card(0))
+playerdeck.append(Card(13))
+aideck.append(Card(1))
+playerdeck.append(Card(14))
+aideck.append(Card(2))
+playerdeck.append(Card(15))
+aideck.append(Card(4))
+playerdeck.append(Card(16))
+aideck.append(Card(3))
+playerdeck.append(Card(17))
+aideck.append(Card(5))
+playerdeck.append(Card(18))
+aideck.append(Card(6))
+playerdeck.append(Card(19))
+aideck.append(Card(7))
+playerdeck.append(Card(20))
+aideck.append(Card(9))
+playerdeck.append(Card(21))
+aideck.append(Card(8))
+playerdeck.append(Card(22))
+aideck.append(Card(10))
+playerdeck.append(Card(23))
+aideck.append(Card(11))
+playerdeck.append(Card(24))
+aideck.append(Card(12))
+playerdeck.append(Card(25))
+aideck.append(Card(50))
+playerdeck.append(Card(26))
+aideck.append(Card(51))
+playerdeck.append(Card(27))
 # Create a frame
 frame1 = ttk.Frame(root, padding = "3 3 12 12")
 frame1.grid(column=0, row=0, sticky=(N, W, E, S))
@@ -233,7 +264,7 @@ Play.grid(row=3, column=1)
 display = ttk.Label(frame2)
 display.grid(row = 3, column = 0, sticky = (N, W, E, S))
 warCardDisplay = ttk.Label(frame2)
-warCardDisplay.grid(row = 4, column = 0, sticky = (N, W, E, S))
+warCardDisplay.grid(row = 4, column = 0, columnspan = 2, sticky = (N, W, E, S))
 # Int to be used later
 war = [1]
 wardeck = []

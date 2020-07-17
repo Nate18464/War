@@ -61,7 +61,7 @@ def secondScreen(*args):
     if war[0] == 1:
         # Reset display to empty string if not on war
         display["text"] = ""
-        warCardDisplay["text"] == ""
+        warCardDisplay["text"] = ""
     
 def thirdScreen(*args):
     # Create a label for the ai's card using the top of the ai player's deck
@@ -103,6 +103,8 @@ def playerWin(*args):
     # Add won cards to player deck
     playerdeck.append(aideck[0])
     playerdeck.append(playerdeck[0])
+    if war[0] > 1:
+        warCardDislpay["text"] = "Number of cards won by " + name.get() + " in this war: " + str(len(wardeck))
     for c in range(len(wardeck)-1, -1, -1):
         playerdeck.append(wardeck[c])
         wardeck.pop(c)
@@ -112,6 +114,8 @@ def aiWin(*args):
     # Add won cards to ai deck
     aideck.append(aideck[0])
     aideck.append(playerdeck[0])
+    if war[0] > 1:
+        warCardDislpay["text"] = "Number of cards won by AI in this war: " + str(len(wardeck))
     for c in range(len(wardeck)-1, -1, -1):
         aideck.append(wardeck[c])
         wardeck.pop(c)
@@ -182,43 +186,12 @@ for c in range(52):
 aideck = []
 playerdeck = []
 for c in range(51, -1, -1):
-    break
     randnum = random.randint(0,c)
     if c%2 == 0:
         aideck.append(deck[randnum])
     else:
         playerdeck.append(deck[randnum])
     deck.pop(randnum)
-aideck.append(Card(0))
-playerdeck.append(Card(13))
-aideck.append(Card(1))
-playerdeck.append(Card(14))
-aideck.append(Card(2))
-playerdeck.append(Card(15))
-aideck.append(Card(4))
-playerdeck.append(Card(16))
-aideck.append(Card(3))
-playerdeck.append(Card(17))
-aideck.append(Card(5))
-playerdeck.append(Card(18))
-aideck.append(Card(6))
-playerdeck.append(Card(19))
-aideck.append(Card(7))
-playerdeck.append(Card(20))
-aideck.append(Card(9))
-playerdeck.append(Card(21))
-aideck.append(Card(8))
-playerdeck.append(Card(22))
-aideck.append(Card(10))
-playerdeck.append(Card(23))
-aideck.append(Card(11))
-playerdeck.append(Card(24))
-aideck.append(Card(12))
-playerdeck.append(Card(25))
-aideck.append(Card(50))
-playerdeck.append(Card(26))
-aideck.append(Card(51))
-playerdeck.append(Card(27))
 # Create a frame
 frame1 = ttk.Frame(root, padding = "3 3 12 12")
 frame1.grid(column=0, row=0, sticky=(N, W, E, S))
